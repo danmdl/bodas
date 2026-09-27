@@ -18,6 +18,13 @@
     radial-gradient(ellipse at 50% 48%, transparent 48%, rgba(4, 17, 25, 0.14) 100%);
 }
 
+/* Keep the names below the couple's faces, matching the original hero composition. */
+@media (min-width: 701px) {
+  .cinema-copy {
+    bottom: 72px;
+  }
+}
+
 @media (max-width: 700px) {
   .portrait-frame {
     box-shadow:
