@@ -39,8 +39,8 @@ export type Destination = {
 export const wedding = {
   names: {
     first: "Micaela",
-    second: "Adriaham",
-    full: "Micaela Ventre & Adriaham Maddalena",
+    second: "Adrian",
+    full: "Micaela Ventre & Adrian Maddalena",
   },
   dateLabel: "14 de noviembre de 2026",
   compactDate: "14.11.2026",
@@ -52,7 +52,7 @@ export const wedding = {
     tagline: "Una historia, un sí y un viaje por descubrir",
     photo: {
       src: "/photos/242544.webp",
-      alt: "Micaela y Adriaham juntos, rodeados de luces cálidas",
+      alt: "Micaela y Adrian juntos, rodeados de luces cálidas",
       caption: "Nuestro lugar favorito: juntos.",
       objectPosition: "55% 34%",
     } satisfies Photo,
@@ -86,13 +86,13 @@ export const wedding = {
     photos: [
       {
         src: "/photos/346636.webp",
-        alt: "Micaela y Adriaham juntos, abrazados",
+        alt: "Micaela y Adrian juntos, abrazados",
         caption: "De todos los lugares, vos.",
         objectPosition: "50% 37%",
       },
       {
         src: "/photos/240930.webp",
-        alt: "Una selfie de Micaela y Adriaham sonriendo",
+        alt: "Una selfie de Micaela y Adrian sonriendo",
         caption: "Lo simple. Lo nuestro.",
         objectPosition: "50% 50%",
       },
@@ -146,9 +146,6 @@ export const wedding = {
     publicProgress: "percentage" as "percentage" | "unlocked" | "hidden",
     received: 0, // Total REAL recibido. Actualización manual, sin integración bancaria.
   },
-  // Referencia pública del viaje, independiente del dinero recibido y sus metas.
-  // Actualizá manualmente precio, fechas y tipo de cambio al volver a cotizar.
-  // El costo del vuelo proviene de la captura de Despegar compartida por Dan.
   travelReference: {
     enabled: true,
     people: 2,
@@ -160,16 +157,13 @@ export const wedding = {
     flightConditions:
       "Ida y vuelta para dos con Lufthansa, una escala. Precio con AstroPay.",
     flightUrl: "https://www.despegar.com.ar/vuelos/",
-    // Distancia de EZE–CPH publicada por Lufthansa, ida + vuelta, sin sumar escalas.
     roundTripKm: 24190,
     distanceUrl:
       "https://www.lufthansa.com/lhg/ar/es/o-d/cy-cy/copenhague-buenos-aires",
-    arsPerUsd: 1545, // BNA, dólar billete vendedor del 25/9/2026. Referencia, no dólar tarjeta.
+    arsPerUsd: 1545,
     exchangeDateLabel: "25/9/2026",
     exchangeUrl: "https://www.bna.com.ar/Personas",
     suggestedGiftsArs: [50000, 100000, 200000],
-    // Supuestos propios de planificación. NO son reservas ni cotizaciones fechadas.
-    // Se llega el 26/11 y se vuelve el 30/11: cuatro noches y cinco días en destino.
     nights: 4,
     days: 5,
     roomPerNightUsd: [110, 180],
@@ -180,8 +174,6 @@ export const wedding = {
     accommodationNote:
       "CABINN publica tarifas desde DKK 575 por noche. Para una habitación de dos estimamos US$110–180 por noche, sin disponibilidad confirmada para estas fechas.",
   },
-  // Goals son metas INCREMENTALES por destino, no acumuladas. null = pendiente de definir.
-  // Los destinos se desbloquean en orden. No son reservas confirmadas.
   destinations: [
     {
       id: "bariloche",
@@ -307,13 +299,13 @@ export const wedding = {
     },
     {
       src: "/photos/286364.webp",
-      alt: "Micaela y Adriaham sonriendo juntos en una selfie",
+      alt: "Micaela y Adrian sonriendo juntos en una selfie",
       caption: "02 / Las risas de todos los días",
       objectPosition: "54% 48%",
     },
     {
       src: "/photos/346636.webp",
-      alt: "Micaela y Adriaham abrazados",
+      alt: "Micaela y Adrian abrazados",
       caption: "03 / Donde queremos estar",
       objectPosition: "50% 35%",
     },
@@ -325,20 +317,9 @@ export const wedding = {
     },
     {
       src: "/photos/361584.webp",
-      alt: "Un abrazo de Micaela y Adriaham",
-      caption: "05 / Nuestro lugar en el mundo",
-      objectPosition: "56% 45%",
-    },
-    {
-      src: "/photos/231914.webp",
-      alt: "Micaela y Adriaham compartiendo un recuerdo con una persona querida",
-      caption: "06 / Las personas que nos acompañan",
-      objectPosition: "55% 30%",
+      alt: "Micaela y Adrian compartiendo un momento juntos",
+      caption: "05 / Siempre, con vos",
+      objectPosition: "50% 42%",
     },
   ] satisfies Photo[],
-  finale: {
-    backgroundImage: "/photos/aurora.webp",
-    title: "Lo más lindo del viaje es compartirlo",
-    subtitle: "Gracias por ser parte de nuestra historia",
-  },
-};
+} as const;
