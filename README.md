@@ -78,7 +78,6 @@ El archivo `.openai/hosting.json` solo vincula la vista previa. Vercel no lo uti
 - `gift-kilometers.tsx`: equivalencia simbólica de regalos y presupuesto de referencia.
 - `lib/travel-reference.ts`: cálculo proporcional de kilómetros y estimación de estadía.
 - `motion-primitives.tsx`: botones magnéticos y transiciones cortas.
-- `lib/calendar.ts`: calendarios ICS compatibles con Google, Apple y Outlook.
 
 ## Accesibilidad y rendimiento
 
@@ -136,3 +135,7 @@ Supuestos propios para la estadía de dos: habitación US$110–180 por noche, c
 La ilustración es `aporteARS / arsPorUSD / pasajesParaDosUSD × kilómetrosIdaVuelta`, redondeada a 10 km. AR$100.000 corresponden a unos 370 km simbólicos con esta base. Nunca representa millas canjeables, un precio real por kilómetro ni actualiza las metas del viaje. El cambio y la tarifa se actualizan manualmente.
 
 Las distancias de los panoramas se calcularon entre centros de ciudad en línea recta con la fórmula haversine, redondeadas a 10 km. Oslo representa Noruega y Estocolmo la etapa de países escandinavos. No representan distancias de carretera ni itinerarios reservados.
+
+## Actualizaciones en Vercel
+
+Conectá el proyecto existente de Vercel al repositorio `danmdl/bodas` y elegí `main` como rama de producción. Los nuevos commits en esa rama disparan una compilación y publicación automática cuando la integración está habilitada.
