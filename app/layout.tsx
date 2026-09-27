@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "./redesign.css";
 import "./refinements.css";
+import "./hero-refresh.css";
 import { wedding } from "@/config/wedding";
 
 const serif = localFont({
