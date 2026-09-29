@@ -1136,3 +1136,14 @@ footer {
 .gift-slider-limits { display: flex; justify-content: space-between; gap: 12px; font-size: .75rem; color: #bccbc5; }
 .kilometer-calculator .kilometer-result > strong { font-size: clamp(2.6rem, 5.5vw, 4.5rem); overflow-wrap: anywhere; }
 @media (max-width: 700px) { .kilometer-calculator .kilometer-result > strong { font-size: clamp(2.5rem, 11vw, 4.5rem); } }
+
+/* Avoid continuously repainting a large blurred aurora below the viewport.
+   Hero light movement remains compositor-driven. */
+.finale-aurora {
+  filter: none;
+  animation: none;
+  background: radial-gradient(ellipse, #359c8630, #7262ad18 45%, transparent 70%);
+}
+@media (hover: none) and (pointer: coarse) {
+  .cinema-cta { backdrop-filter: none; }
+}
