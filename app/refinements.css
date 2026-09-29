@@ -592,7 +592,7 @@ body::after {
 .date-numeral > span {
   font-family: var(--font-serif), serif;
   font-size: 9.5rem;
-  line-height: 0.8;
+  line-height: 1.1;
   color: #f5ead7;
 }
 .date-numeral > div {
@@ -990,12 +990,13 @@ footer {
   .date-moment > .eyebrow {
     font-size: 0.625rem;
     letter-spacing: 0.065em;
-    min-height: 32px;
+    line-height: 1.5;
+    min-height: 3em;
   }
   .date-numeral {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0;
+    gap: 8px;
     margin-top: 2px;
   }
   .date-numeral > span {
