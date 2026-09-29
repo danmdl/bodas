@@ -4,6 +4,7 @@ export function symbolicKilometers(
   arsPerUsd: number,
   flightUsd: number,
   roundTripKm: number,
+  precision = 10,
 ) {
   if (
     ![amountArs, arsPerUsd, flightUsd, roundTripKm].every(Number.isFinite) ||
@@ -17,7 +18,7 @@ export function symbolicKilometers(
     Math.round(
       Math.min(roundTripKm, (amountArs / arsPerUsd / flightUsd) * roundTripKm) /
         10,
-    ) * 10
+    ) * precision
   );
 }
 export function tripBudget(reference: {
