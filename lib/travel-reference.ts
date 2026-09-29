@@ -11,13 +11,15 @@ export function symbolicKilometers(
     amountArs < 0 ||
     arsPerUsd <= 0 ||
     flightUsd <= 0 ||
-    roundTripKm <= 0
+    roundTripKm <= 0 ||
+    !Number.isFinite(precision) ||
+    precision <= 0
   )
     return 0;
   return (
     Math.round(
       Math.min(roundTripKm, (amountArs / arsPerUsd / flightUsd) * roundTripKm) /
-        10,
+        precision,
     ) * precision
   );
 }
