@@ -81,7 +81,7 @@ export const wedding = {
       "A partir de ese día, y con su bendición, todo sucedió rápidamente.",
     ],
     ending:
-      "El 27 de julio recibimos la bendición oficialmente como novios y hoy nos preparamos para nuestra boda.",
+      "El 26 de julio recibimos la bendición oficialmente como novios y hoy nos preparamos para nuestra boda.",
     handwritten: "Siempre, con vos.",
     photos: [
       {
