@@ -6,7 +6,8 @@ const config: NextConfig = {
   ...(staticExport ? { output: "export" } : {}),
   images: {
     unoptimized: staticExport,
-    formats: ["image/avif", "image/webp"],
+    // WebP avoids the slower cold AVIF encoding on first requests.
+    formats: ["image/webp"],
     qualities: [75, 85],
   },
   poweredByHeader: false,
