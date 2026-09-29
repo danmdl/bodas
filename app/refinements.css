@@ -1147,3 +1147,12 @@ footer {
 @media (hover: none) and (pointer: coarse) {
   .cinema-cta { backdrop-filter: none; }
 }
+
+.gift-stage { text-align: center; margin: 24px 0 12px; min-height: 220px; }
+.gift-stage > span { color: #bccbc5; font-size: .625rem; letter-spacing: .12em; }
+.gift-stage > strong { display: block; color: var(--gold); font-family: var(--font-serif), serif; font-size: clamp(2rem, 7vw, 2.8rem); font-weight: 400; line-height: 1.15; margin: 12px 0; }
+.gift-stage > p { color: #c8d4ce; font-size: .875rem; line-height: 1.65; }
+.gift-stage-dots { display: flex; gap: 8px; justify-content: center; margin: 18px 0; }
+.gift-stage-dots i { width: 9px; height: 9px; border-radius: 50%; background: #385159; }
+.gift-stage-dots i.is-reached { background: var(--gold); }
+.gift-stage > small { display: block; color: #a7bfba; font-size: .6875rem; line-height: 1.5; }
