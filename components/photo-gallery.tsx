@@ -1,10 +1,10 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import type { Photo } from "@/config/wedding";
-export default function PhotoGallery({ photos }: { photos: Photo[] }) {
+function PhotoGallery({ photos }: { photos: Photo[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -167,7 +167,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                     src={photo.src}
                     alt={photo.alt}
                     fill
-                    sizes="(max-width: 640px) 80vw, 470px"
+                    sizes="(max-width: 640px) 80vw, 390px"
                     style={{ objectPosition: photo.objectPosition }}
                   />
                 </div>
@@ -194,3 +194,5 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
     </div>
   );
 }
+
+export default memo(PhotoGallery);
