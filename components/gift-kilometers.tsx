@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ArrowUpRight, Plus, Plane } from "lucide-react";
 import type { WeddingData } from "@/lib/wedding-data";
 import { symbolicKilometers, tripBudget } from "@/lib/travel-reference";
+// Slider bounds are editable here. Each step represents one Argentine peso.
+const giftSlider = { min: 10_000, max: 1_000_000, step: 1 };
 const number = (n: number) =>
   n.toLocaleString("es-AR", { maximumFractionDigits: 0 });
 
@@ -15,7 +17,7 @@ export default function GiftKilometers({
 }) {
   const ref = data.travelReference;
   const [amount, setAmount] = useState(
-    ref.suggestedGiftsArs[1] ?? ref.suggestedGiftsArs[0],
+    Math.min(giftSlider.max, Math.max(giftSlider.min, ref.suggestedGiftsArs[1] ?? ref.suggestedGiftsArs[0] ?? 100_000)),
   );
   if (!ref.enabled)
     return (
@@ -33,6 +35,7 @@ export default function GiftKilometers({
     ref.arsPerUsd,
     ref.flightUsd,
     ref.roundTripKm,
+    0.001,
   );
   const budget = tripBudget(ref);
   return (
@@ -48,20 +51,26 @@ export default function GiftKilometers({
       </div>
       <div className="gift-distance-body">
         <div className="kilometer-calculator">
-          <div
-            className="gift-amounts"
-            role="group"
-            aria-label="Elegí un aporte de ejemplo en pesos argentinos"
-          >
-            {ref.suggestedGiftsArs.map((value) => (
-              <button
-                key={value}
-                aria-pressed={value === amount}
-                onClick={() => setAmount(value)}
-              >
-                AR$ {number(value)}
-              </button>
-            ))}
+          <div className="gift-slider">
+            <label htmlFor="gift-amount">Elegí tu aporte</label>
+            <output htmlFor="gift-amount">AR$ {number(amount)}</output>
+            <input
+              id="gift-amount"
+              type="range"
+              min={giftSlider.min}
+              max={giftSlider.max}
+              step={giftSlider.step}
+              value={amount}
+              onChange={(event) => setAmount(Number(event.target.value))}
+              aria-valuetext={`AR$ ${number(amount)}, ${km.toLocaleString("es-AR", { maximumFractionDigits: 3 })} kilómetros simbólicos`}
+              style={{
+                background: `linear-gradient(to right, var(--gold) ${((amount - giftSlider.min) / (giftSlider.max - giftSlider.min)) * 100}%, #385159 ${((amount - giftSlider.min) / (giftSlider.max - giftSlider.min)) * 100}%)`,
+              }}
+            />
+            <div className="gift-slider-limits" aria-hidden="true">
+              <span>AR$ {number(giftSlider.min)}</span>
+              <span>AR$ {number(giftSlider.max)}</span>
+            </div>
           </div>
           <div
             className="kilometer-result"
@@ -70,7 +79,7 @@ export default function GiftKilometers({
           >
             <span>nos acerca aproximadamente</span>
             <strong>
-              {number(km)}
+              {km.toLocaleString("es-AR", { maximumFractionDigits: 3 })}
               <small>km</small>
             </strong>
             <span>simbólicos a {ref.destination}</span>
