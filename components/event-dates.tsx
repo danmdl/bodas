@@ -36,14 +36,14 @@ export default function EventDates({ data }: { data: WeddingData }) {
         </div>
       </details>
       <div className="dates-pair">
-        {data.events.map((event, i) => (
+        {data.events.map((event) => (
           <article
             className="date-moment"
             key={event.id}
             aria-label={`${event.venue}, ${event.dateLabel}`}
           >
             <p className="eyebrow">
-              {i === 0 ? "CIVIL" : "CEREMONIA RELIGIOSA"}
+              {event.venue}
             </p>
             <div className="date-numeral" aria-label={event.dateLabel}>
               <span>{event.day}</span>
