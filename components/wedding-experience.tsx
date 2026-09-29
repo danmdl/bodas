@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import {
   AnimatePresence,
@@ -203,18 +203,12 @@ export default function WeddingExperience({ data }: { data: WeddingData }) {
     if (burstTimer.current) clearTimeout(burstTimer.current);
     burstTimer.current = setTimeout(() => setCelebrating(false), 1300);
   }
-  const gift = () => setGiftOpen(true);
+  const gift = useCallback(() => setGiftOpen(true), []);
   return (
     <MotionConfig reducedMotion="user">
       <a className="skip-link" href="#main">
         Saltar al contenido
       </a>
-      <div className="opening-curtain" aria-hidden="true">
-        <span>
-          m<span>&</span>a
-        </span>
-        <i />
-      </div>
       <motion.div
         className="page-progress"
         style={{ scaleX: reduced ? scrollYProgress : progress }}
