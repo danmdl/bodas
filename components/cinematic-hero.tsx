@@ -76,7 +76,7 @@ function CinematicHero({ data }: { data: WeddingData }) {
             src={data.story.photos[1].src}
             alt=""
             fill
-            sizes="(max-width: 700px) 27vw, 20vw"
+            sizes="(max-width: 700px) 29vw, (min-width: 1600px) 240px, 205px"
             style={{ objectPosition: data.story.photos[1].objectPosition }}
           />
           <span>vos + yo</span>
@@ -89,7 +89,7 @@ function CinematicHero({ data }: { data: WeddingData }) {
             src={data.gallery[4].src}
             alt=""
             fill
-            sizes="(max-width: 700px) 27vw, 20vw"
+            sizes="(max-width: 700px) 29vw, (min-width: 1600px) 240px, 205px"
             style={{ objectPosition: data.gallery[4].objectPosition }}
           />
           <span>un mismo camino</span>
@@ -97,7 +97,7 @@ function CinematicHero({ data }: { data: WeddingData }) {
         <motion.div
           className="portrait-frame"
           style={reduced ? {} : { y: centerY, scale: centerScale }}
-          initial={reduced ? false : { opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1] }}
         >
@@ -106,8 +106,8 @@ function CinematicHero({ data }: { data: WeddingData }) {
             alt={data.hero.photo.alt}
             fill
             priority
-            quality={85}
-            sizes="(max-width: 700px) 82vw, 46vw"
+            quality={75}
+            sizes="(max-width: 700px) 80vw, (min-width: 1600px) 550px, 470px"
             style={{ objectPosition: data.hero.photo.objectPosition }}
           />
           <div className="portrait-shade" />
@@ -123,7 +123,7 @@ function CinematicHero({ data }: { data: WeddingData }) {
       >
         <motion.p
           className="cinema-eyebrow"
-          initial={reduced ? false : { opacity: 0, y: 15 }}
+          initial={reduced ? false : { y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.8 }}
         >
@@ -131,7 +131,7 @@ function CinematicHero({ data }: { data: WeddingData }) {
         </motion.p>
         <h1 aria-label={`${data.names.first} & ${data.names.second}`}>
           <motion.span
-            initial={reduced ? false : { opacity: 0, y: 45 }}
+            initial={reduced ? false : { y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 1.15,
@@ -143,7 +143,7 @@ function CinematicHero({ data }: { data: WeddingData }) {
           </motion.span>
           <motion.span
             className="cinema-second-name"
-            initial={reduced ? false : { opacity: 0, y: 45 }}
+            initial={reduced ? false : { y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 1.15,
