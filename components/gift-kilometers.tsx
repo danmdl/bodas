@@ -35,8 +35,12 @@ export default function GiftKilometers({
     ref.arsPerUsd,
     ref.flightUsd,
     ref.roundTripKm,
-    0.001,
+    1,
   );
+  // Symbolic stages span the slider, independently of real destination costs.
+  const progress = (amount - giftSlider.min) / (giftSlider.max - giftSlider.min);
+  const stageIndex = Math.min(data.destinations.length - 1, Math.floor(progress * data.destinations.length));
+  const stage = data.destinations[stageIndex];
   const budget = tripBudget(ref);
   return (
     <div className="gift-distance-section">
@@ -62,7 +66,7 @@ export default function GiftKilometers({
               step={giftSlider.step}
               value={amount}
               onChange={(event) => setAmount(Number(event.target.value))}
-              aria-valuetext={`AR$ ${number(amount)}, ${km.toLocaleString("es-AR", { maximumFractionDigits: 3 })} kilómetros simbólicos`}
+              aria-valuetext={`AR$ ${number(amount)}, ${number(km)} kilómetros simbólicos`}
               style={{
                 background: `linear-gradient(to right, var(--gold) ${((amount - giftSlider.min) / (giftSlider.max - giftSlider.min)) * 100}%, #385159 ${((amount - giftSlider.min) / (giftSlider.max - giftSlider.min)) * 100}%)`,
               }}
@@ -79,11 +83,24 @@ export default function GiftKilometers({
           >
             <span>nos acerca aproximadamente</span>
             <strong>
-              {km.toLocaleString("es-AR", { maximumFractionDigits: 3 })}
+              {number(km)}
               <small>km</small>
             </strong>
-            <span>simbólicos a {ref.destination}</span>
+            <span>simbólicos para nuestro viaje</span>
           </div>
+          {stage && (
+            <div className="gift-stage" aria-live="polite" aria-atomic="true">
+              <span>IMAGINÁ EL RECORRIDO · {stageIndex + 1} / {data.destinations.length}</span>
+              <strong>{stage.name}</strong>
+              <p>{stage.description}</p>
+              <div className="gift-stage-dots" aria-hidden="true">
+                {data.destinations.map((destination, index) => (
+                  <i key={destination.id} className={index <= stageIndex ? "is-reached" : ""} />
+                ))}
+              </div>
+              <small>Etapas ilustrativas según la barra, no destinos financiados ni distancias reales.</small>
+            </div>
+          )}
           <button
             className="alias-distance"
             onClick={onGift}
