@@ -1,13 +1,13 @@
 "use client";
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { memo, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
-import { useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowLeft, ArrowRight, Check } from "lucide-react";
 import type { WeddingData } from "@/lib/wedding-data";
 import { Reveal } from "./motion-primitives";
 import GiftKilometers from "./gift-kilometers";
 
-export default function Journey({
+function Journey({
   data,
   onGift,
 }: {
@@ -23,6 +23,8 @@ export default function Journey({
   const [active, setActive] = useState(0);
   const reduced = useReducedMotion();
   const count = data.destinations.length;
+  // Keep distant destination images out of the initial network/decode queue.
+  const nearJourney = useInView(shell, { margin: "600px", once: true });
   useEffect(() => {
     const tab = tabs.current[active];
     const list = tab?.parentElement;
@@ -210,13 +212,13 @@ export default function Journey({
                   aria-hidden={i !== active}
                   inert={i !== active}
                 >
-                  <Image
+                  {nearJourney && Math.abs(i - active) <= 1 && <Image
                     src={d.image}
                     alt={d.imageAlt}
                     fill
                     sizes="(max-width: 700px) 94vw, 92vw"
-                    quality={85}
-                  />
+                    quality={75}
+                  />}
                   <div className="scene-shade" />
                   <div className="rail-topline">
                     <span>{d.coordinates}</span>
@@ -309,3 +311,5 @@ export default function Journey({
     </section>
   );
 }
+
+export default memo(Journey);
