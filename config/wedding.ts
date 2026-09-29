@@ -116,7 +116,7 @@ export const wedding = {
     {
       id: "ceremonia",
       title: "Nuestro sí ante Dios",
-      venue: "Ceremonia religiosa · MJA",
+      venue: "Ceremonia en la iglesia",
       day: "14",
       month: "NOV",
       year: "2026",
