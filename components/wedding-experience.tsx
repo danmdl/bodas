@@ -393,7 +393,7 @@ export default function WeddingExperience({ data }: { data: WeddingData }) {
                 EL PRÓXIMO CAPÍTULO LO ESCRIBIMOS JUNTOS
               </p>
               <h2 id="finale-title">
-                Lo más lindo del viaje
+                Lo más lindo del viaje{" "}
                 <br />
                 es <em>compartirlo.</em>
               </h2>
