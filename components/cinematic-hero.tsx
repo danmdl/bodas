@@ -86,11 +86,11 @@ function CinematicHero({ data }: { data: WeddingData }) {
           style={reduced ? {} : { x: sideRight, rotate: 12 }}
         >
           <Image
-            src={data.gallery[4].src}
+            src={data.gallery[5].src}
             alt=""
             fill
             sizes="(max-width: 700px) 29vw, (min-width: 1600px) 240px, 205px"
-            style={{ objectPosition: data.gallery[4].objectPosition }}
+            style={{ objectPosition: data.gallery[5].objectPosition }}
           />
           <span>un mismo camino</span>
         </motion.div>
@@ -129,7 +129,7 @@ function CinematicHero({ data }: { data: WeddingData }) {
         >
           NUESTRO SÍ, ANTE DIOS
         </motion.p>
-        <h1 aria-label={`${data.names.first} & ${data.names.second}`}>
+        <h1 aria-label={`${data.names.second} & ${data.names.first}`}>
           <motion.span
             initial={reduced ? false : { y: 25 }}
             animate={{ opacity: 1, y: 0 }}
@@ -139,7 +139,7 @@ function CinematicHero({ data }: { data: WeddingData }) {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            {data.names.first}
+            {data.names.second}
           </motion.span>
           <motion.span
             className="cinema-second-name"
@@ -151,7 +151,7 @@ function CinematicHero({ data }: { data: WeddingData }) {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            <em>&</em> {data.names.second}
+            <em>&</em> {data.names.first}
           </motion.span>
         </h1>
         <p className="cinema-tagline">{data.hero.tagline}</p>
