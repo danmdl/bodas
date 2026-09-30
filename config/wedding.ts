@@ -123,9 +123,9 @@ export const wedding = {
       dateLabel: "14 de noviembre de 2026",
       timeLabel: "Horario a confirmar",
       address:
-        "Ricardo Albino 1860, entre Lincoln y Moreno, General San Martín",
+        "Ricardo Balbín 1860, entre Lincoln y Moreno, General San Martín",
       mapUrl:
-        "https://www.google.com/maps/search/?api=1&query=Ricardo+Albino+1860+General+San+Martin+Buenos+Aires",
+        "https://maps.app.goo.gl/rKiwDp7rT3bp792TA",
     },
   ] satisfies WeddingEvent[],
   details: {
