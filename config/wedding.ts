@@ -39,7 +39,7 @@ export type Destination = {
 export const wedding = {
   names: {
     first: "Micaela",
-    second: "Adrian",
+    second: "Adrián",
     full: "Micaela Ventre & Adrian Maddalena",
   },
   dateLabel: "14 de noviembre de 2026",
@@ -135,6 +135,8 @@ export const wedding = {
     dressCode: null as string | null,
   },
   gifts: {
+    // Enlace público de la lista de regalos. Dejá vacío para ocultar el botón.
+    registryUrl: "https://share.google/RXFxG6acGjV4HjeQF",
     title: "¿Hasta dónde nos lleva tu regalo?",
     introduction:
       "Tu compañía es nuestro mejor regalo. Si además querés ayudarnos a sumar kilómetros a esta aventura, tu apoyo nos acerca a un nuevo destino.",
@@ -306,34 +308,34 @@ export const wedding = {
       objectPosition: "56% 36%",
     },
     {
+      src: "/photos/231914.webp",
+      alt: "Micaela y Adriaham compartiendo un recuerdo con una persona querida",
+      caption: "02 / Las personas que nos acompañan",
+      objectPosition: "55% 30%",
+    },
+    {
       src: "/photos/286364.webp",
       alt: "Micaela y Adriaham sonriendo juntos en una selfie",
-      caption: "02 / Las risas de todos los días",
+      caption: "03 / Las risas de todos los días",
       objectPosition: "54% 48%",
     },
     {
       src: "/photos/346636.webp",
       alt: "Micaela y Adriaham abrazados",
-      caption: "03 / Donde queremos estar",
+      caption: "04 / Donde queremos estar",
       objectPosition: "50% 35%",
     },
     {
       src: "/photos/358997.webp",
       alt: "La pareja disfrutando de un momento al aire libre",
-      caption: "04 / Un ratito con vos",
+      caption: "05 / Un ratito con vos",
       objectPosition: "45% 45%",
     },
     {
       src: "/photos/361584.webp",
       alt: "Un abrazo de Micaela y Adriaham",
-      caption: "05 / Nuestro lugar en el mundo",
+      caption: "06 / Nuestro lugar en el mundo",
       objectPosition: "56% 45%",
-    },
-    {
-      src: "/photos/231914.webp",
-      alt: "Micaela y Adriaham compartiendo un recuerdo con una persona querida",
-      caption: "06 / Las personas que nos acompañan",
-      objectPosition: "55% 30%",
     },
   ] satisfies Photo[],
   finale: {
