@@ -1156,3 +1156,40 @@ footer {
 .gift-stage-dots i { width: 9px; height: 9px; border-radius: 50%; background: #385159; }
 .gift-stage-dots i.is-reached { background: var(--gold); }
 .gift-stage > small { display: block; color: #a7bfba; font-size: .6875rem; line-height: 1.5; }
+
+/* Compact registry shortcut beside the existing support keepsake. */
+.floating-registry {
+  position: fixed;
+  z-index: 60;
+  right: 23px;
+  top: calc(48% - 96px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid #d7c29480;
+  border-radius: 999px;
+  background: #17333ef5;
+  color: #f1e7d2;
+  font-size: .8125rem;
+  box-shadow: 0 8px 28px #010b1640;
+}
+.floating-registry:hover { background: #294650; }
+.floating-registry:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+@media (max-width: 1199px) {
+  .floating-registry { top: auto; bottom: 108px; right: 16px; }
+}
+@media (max-width: 700px) {
+  .floating-registry {
+    right: 10px;
+    bottom: calc(max(14px, env(safe-area-inset-bottom)) + 79px);
+    gap: 7px;
+    padding: 9px 12px;
+    font-size: .75rem;
+  }
+}
+@media (max-width: 370px) {
+  .floating-registry { right: 7px; }
+}
