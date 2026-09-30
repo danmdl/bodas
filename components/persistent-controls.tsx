@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, Gift, Sparkles } from "lucide-react";
 import type { WeddingData } from "@/lib/wedding-data";
 export default function PersistentControls({
   data,
@@ -35,6 +35,19 @@ export default function PersistentControls({
       className={`persistent-ui ${hidden ? "ui-hidden" : ""}`}
       inert={hidden}
     >
+      {data.gifts.registryUrl && (
+        <a
+          className="floating-registry"
+          href={data.gifts.registryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Ver nuestra lista de regalos (abre en otra pestaña)"
+        >
+          <Gift size={18} aria-hidden="true" />
+          <span>Lista de regalos</span>
+          <ArrowUpRight size={15} aria-hidden="true" />
+        </a>
+      )}
       <button
         className="floating-support"
         onClick={onGift}
