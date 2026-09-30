@@ -18,6 +18,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
+import TrafficTracker, { trackWeddingEvent } from "./traffic-tracker";
 import type { WeddingData } from "@/lib/wedding-data";
 import { Magnetic, Reveal } from "./motion-primitives";
 import Journey from "./journey";
@@ -79,6 +80,7 @@ function GiftDialog({
         }
       }
     }
+    if (success) trackWeddingEvent("alias");
     setCopied(success);
     setCopyError(!success);
   }
@@ -206,6 +208,7 @@ export default function WeddingExperience({ data }: { data: WeddingData }) {
   const gift = useCallback(() => setGiftOpen(true), []);
   return (
     <MotionConfig reducedMotion="user">
+      <TrafficTracker />
       <a className="skip-link" href="#main">
         Saltar al contenido
       </a>
