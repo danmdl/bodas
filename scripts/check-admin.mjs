@@ -2,6 +2,12 @@ import assert from 'node:assert/strict';
 import { randomBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
+// Freeze time after analytics activation so tests do not depend on today's date.
+const RealDate = Date;
+globalThis.Date = class extends RealDate {
+  constructor(...args) { super(...(args.length ? args : ['2026-10-02T15:00:00Z'])); }
+  static now() { return new RealDate('2026-10-02T15:00:00Z').getTime(); }
+};
 // Load server helpers without a production database or extra test dependencies.
 const source = ts.transpileModule(readFileSync(new URL('../lib/site-stats.ts', import.meta.url), 'utf8'), { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 } }).outputText;
 const stats = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
@@ -33,6 +39,7 @@ assert.equal(command[2], 2);
 assert.ok(command.includes(7776000), '90-day retention');
 globalThis.fetch = async () => Response.json({ result: [['visit', '3', 'unique', '2'], []] });
 const rows = await stats.report(2);
+assert.equal(rows[0].date, '2026-10-01');
 assert.equal(rows[0].fields.visit, 3);
 assert.equal(rows[0].fields.unique, 2);
 assert.deepEqual(rows[1].fields, {});

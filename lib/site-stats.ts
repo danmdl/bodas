@@ -2,6 +2,8 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 
 // Server-only configuration. Never use NEXT_PUBLIC_ for these secrets.
 export const COOKIE = "wedding_admin";
+// First day of real analytics, in Argentina. Earlier records are excluded.
+const analyticsStartDate = "2026-10-01";
 const ttl = 60 * 60 * 24 * 90;
 export const storageReady = () => Boolean(process.env.STORAGE_REDIS_URL || process.env.REDIS_URL) || Boolean((process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL) && (process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN));
 export const ready = () => storageReady() && (process.env.ADMIN_PASSWORD?.length ?? 0) >= 16;
@@ -53,6 +55,7 @@ export async function limited(key: string, max: number, seconds: number) {
 }
 export async function record(event: string, visitor: string, country: string, device: string) {
   const day = localDate();
+  if (day < analyticsStartDate) return;
   const hour = new Intl.DateTimeFormat("en-GB", { timeZone: "America/Argentina/Buenos_Aires", hour: "2-digit", hourCycle: "h23" }).format(new Date());
   // Atomic aggregates, no raw IP addresses or individual browsing history.
   await redis(["EVAL", `
@@ -68,7 +71,8 @@ export async function record(event: string, visitor: string, country: string, de
     return 1`, 2, `wedding:day:${day}`, `wedding:unique:${day}`, event, visitor, hour, country, device, ttl]);
 }
 export async function report(days: number) {
-  const dates = Array.from({ length: days }, (_, i) => localDate(new Date(Date.now() - (days - i - 1) * 86400000)));
+  const dates = Array.from({ length: days }, (_, i) => localDate(new Date(Date.now() - (days - i - 1) * 86400000))).filter(date => date >= analyticsStartDate);
+  if (!dates.length) return [];
   // One bounded read for the selected date range.
   const result = await redis(["EVAL", "local r={}; for i,k in ipairs(KEYS) do r[i]=redis.call('HGETALL',k) end; return r", dates.length, ...dates.map(d => `wedding:day:${d}`)]) as string[][];
   return dates.map((date, i) => {

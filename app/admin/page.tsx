@@ -54,6 +54,7 @@ export default function AdminPage() {
       <input id="admin-password" type="password" autoComplete="current-password" required maxLength={200} value={password} onChange={e => setPassword(e.target.value)} />
       <button disabled={busy} type="submit">{busy ? "Conectando…" : "Entrar al panel"}</button>
     </form> : <>
+      <p className={styles.note}>Contabilización desde el 1 de octubre de 2026 · Horario de Argentina.</p>
       <div className={styles.toolbar}><label>Período <select value={days} disabled={busy} onChange={e => setDays(Number(e.target.value))}><option value={7}>Últimos 7 días</option><option value={30}>Últimos 30 días</option><option value={90}>Últimos 90 días</option></select></label><button disabled={busy} onClick={load}>Actualizar</button><button disabled={busy} onClick={logout}>Cerrar sesión</button></div>
       <div className={styles.cards}>{[["Visitas", totals.visit || 0], ["Hoy", rows.at(-1)?.fields.visit || 0], ["Lista de regalos", totals.registry || 0], ["Alias copiado", totals.alias || 0]].map(([label, value]) => <section key={label}><span>{label}</span><strong>{number(Number(value))}</strong></section>)}</div>
       {!totals.visit && <p className={styles.empty}>Todavía no hay visitas registradas en este período. Los datos van a aparecer cuando entren visitantes a la web.</p>}
