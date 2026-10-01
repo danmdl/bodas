@@ -4,7 +4,7 @@ URL: /admin. No tiene contraseña por defecto ni secretos en GitHub.
 
 ## Activación en Vercel
 
-1. En micayadri-vercel > Storage, crear/conectar Upstash Redis mediante Marketplace. Elegir el plan gratuito si está disponible y revisar los límites antes de confirmar. Conectar a Production. El código acepta UPSTASH_REDIS_REST_URL y UPSTASH_REDIS_REST_TOKEN, o KV_REST_API_URL y KV_REST_API_TOKEN.
+1. La base Redis Cloud conectada a micayadri-vercel usa STORAGE_REDIS_URL. Verificar que esté disponible para Production. También se admite REDIS_URL, o alternativamente Upstash con UPSTASH_REDIS_REST_URL y UPSTASH_REDIS_REST_TOKEN (o KV_REST_API_URL y KV_REST_API_TOKEN). No copiar las credenciales al repositorio.
 2. En Settings > Environment Variables, agregar ADMIN_PASSWORD para Production. Usar una contraseña aleatoria de al menos 16 caracteres, por ejemplo la generada por un administrador de contraseñas. No usar NEXT_PUBLIC_, no guardar en GitHub.
 3. Redeploy del último commit para aplicar variables. Abrir /admin e ingresar esa contraseña. Probar una visita en incógnito y actualizar el panel.
 

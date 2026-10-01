@@ -3,7 +3,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 // Server-only configuration. Never use NEXT_PUBLIC_ for these secrets.
 export const COOKIE = "wedding_admin";
 const ttl = 60 * 60 * 24 * 90;
-export const storageReady = () => Boolean((process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL) && (process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN));
+export const storageReady = () => Boolean(process.env.STORAGE_REDIS_URL || process.env.REDIS_URL) || Boolean((process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL) && (process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN));
 export const ready = () => storageReady() && (process.env.ADMIN_PASSWORD?.length ?? 0) >= 16;
 export const digest = (value: string) => createHmac("sha256", process.env.ADMIN_PASSWORD || "disabled").update(value).digest("hex");
 export function equal(a: string, b: string) {
@@ -20,6 +20,21 @@ export function authenticated(value?: string) {
   return !extra && /^\d{13}$/.test(expires) && Number(expires) > Date.now() && Number(expires) <= Date.now() + 8 * 3600000 && equal(signature || "", digest(`session:${expires}`));
 }
 export async function redis(command: (string | number)[]) {
+  const tcpUrl = process.env.STORAGE_REDIS_URL || process.env.REDIS_URL;
+  if (tcpUrl) {
+    // Redis Cloud connection supplied by Vercel. Loaded only on the server.
+    const { createClient } = await import("redis");
+    const client = createClient({ url: tcpUrl, socket: { connectTimeout: 5000, reconnectStrategy: false }, disableOfflineQueue: true });
+    client.on("error", () => {}); // Never log credentials from connection errors.
+    const timeout = setTimeout(() => { if (client.isOpen) client.destroy(); }, 8000);
+    try {
+      await client.connect();
+      return await client.sendCommand(command.map(String));
+    } finally {
+      clearTimeout(timeout);
+      if (client.isOpen) client.destroy();
+    }
+  }
   const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
   if (!url || !token) throw new Error("Storage not configured");
