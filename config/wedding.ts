@@ -121,7 +121,7 @@ export const wedding = {
       month: "NOV",
       year: "2026",
       dateLabel: "14 de noviembre de 2026",
-      timeLabel: "Horario a confirmar",
+      timeLabel: "11:00 hs",
       address:
         "Ricardo Balbín 1860, entre Lincoln y Moreno, General San Martín",
       mapUrl:
